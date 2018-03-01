@@ -34,27 +34,27 @@ export default {
   name: 'Knowledge',
   data () {
     return {
-      languages: [
-          { name: 'Java' },
-          { name: 'JavaScript' },
-          { name: 'Python' },
-          { name: 'HTML/CSS' },
-          { name: 'SQL' }
-      ],
-      interests: [
-          {
-              name: 'Elixir',
-              why: 'Elixir is a functional programming language that is very easy to follow. Learning functional programming helps you approach problems from a different perspectives.'
-          },
-          {
-              name: 'Go',
-              why: 'Go is a language released by Google in 2009 and is growing in popularity due to its focuse on simplicity, conciseness, readability, concurrency and performance.'
-          },
-          {
-              name: 'C#',
-              why: 'C# is a versatile object-oriented language that is used by many industries, from web development to graphics programming.'
-          }
-      ]
+        languages: [
+            { name: 'Java' },
+            { name: 'JavaScript' },
+            { name: 'Python' },
+            { name: 'HTML/CSS' },
+            { name: 'SQL' }
+        ],
+        interests: [
+            {
+                name: 'Elixir',
+                why: 'Elixir is a functional programming language that is very easy to follow. Learning functional programming helps you approach problems from a different perspectives.'
+            },
+            {
+                name: 'Go',
+                why: 'Go is a language released by Google in 2009 and is growing in popularity due to its focuse on simplicity, conciseness, readability, concurrency and performance.'
+            },
+            {
+                name: 'C#',
+                why: 'C# is a versatile object-oriented language that is used by many industries, from web development to graphics programming.'
+            }
+        ]
     }
   }
 }

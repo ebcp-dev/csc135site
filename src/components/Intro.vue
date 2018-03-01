@@ -25,7 +25,7 @@ export default {
     return {
       name: 'Earl Perez',
       email: 'ebcperezcsc@gmail.com',
-      intro: 'I am a Computer Science student at Sacramento State University. My hobbies include playing and watching basketball. My goal is to make enough money to buy a Lambo.'
+      intro: 'I am a Computer Science student at Sacramento State University. My hobbies include playing and watching basketball (go Lakers). My arbitrary career goal as of now is to make enough money to buy a Lambo.'
     }
   }
 }
