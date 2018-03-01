@@ -5,7 +5,7 @@
         <v-layout align-center>
           <v-flex>
             <v-avatar size="150">
-              <img src="../assets/profile.jpg" alt="avatar" />
+              <img src="https://d1qb2nb5cznatu.cloudfront.net/users/4449170-large?1479371603" alt="avatar" />
             </v-avatar>
             <h3 class="display-3">{{ name }}</h3>
             <h3 class="subheading">{{ email }}</h3>
