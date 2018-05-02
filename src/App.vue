@@ -19,6 +19,10 @@
                     <div slot="header">PL Assignment 1</div>
                     <PL1 />
                   </v-expansion-panel-content>
+                  <v-expansion-panel-content>
+                    <div slot="header">PL Assignment 3</div>
+                    <PL3 />
+                  </v-expansion-panel-content>
                 </v-expansion-panel>
             </v-card>
           </v-flex>
@@ -37,13 +41,15 @@
 import Intro from './components/Intro'
 import Knowledge from './components/Knowledge'
 import PL1 from './components/PL1'
+import PL3 from './components/PL3'
 
 export default {
   name: 'App',
   components: {
     Intro,
     Knowledge,
-    PL1
+    PL1,
+    PL3
   }
 }
 </script>
