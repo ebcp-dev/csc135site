@@ -5,7 +5,7 @@
                 <v-card-text class="px-0">
                     <h3 class="headline mb-0">Definitions</h3>
                 </v-card-text>
-                <v-list three-line v-for="word in definitions">
+                <v-list three-line v-for="word in definitions" :key="word.term">
                     <v-container>
                         <p class="title">{{ word.term }}</p>
                         <p class="subheading">{{ word.definition }}</p>

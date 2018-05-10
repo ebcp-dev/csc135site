@@ -7,7 +7,7 @@
                     <v-card-text class="px-0">
                         <h3 class="headline mb-0">Languages</h3>
                     </v-card-text>
-                    <v-list class="content-card" v-for="lang in languages">
+                    <v-list class="content-card" v-for="lang in languages" :key="lang.name">
                         {{ lang.name }}
                     </v-list>
                 </v-card>
@@ -16,7 +16,7 @@
                     <v-card-text class="px-0">
                         <h3 class="headline mb-0">Interests</h3>
                     </v-card-text>
-                    <v-list class="content-card" two-line v-for="intr in interests">
+                    <v-list class="content-card" two-line v-for="intr in interests" :key="intr.name">
                         <v-container>
                             {{intr.name}}:
                             {{intr.why}}

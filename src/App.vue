@@ -2,6 +2,10 @@
   <v-app id="app">
     <v-toolbar color="green darken-4" dark app>
       <v-toolbar-title>Earl Perez</v-toolbar-title>
+      <v-toolbar-items>
+        <v-btn flat href="#assignments">Assignments</v-btn>
+        <v-btn flat href="#rdp">Recursive Descent Parser</v-btn>
+      </v-toolbar-items>
     </v-toolbar>
     <v-content>
       <v-container fill-height>
@@ -10,7 +14,7 @@
             <Intro />
             <Knowledge />
             <br />
-            <v-card color="green darken-1">
+            <v-card id="assignments" color="green darken-1">
                 <v-card-text class="px-0">
                     <h3 class="headline mb-0">Assignments</h3>
                 </v-card-text>
@@ -25,6 +29,8 @@
                   </v-expansion-panel-content>
                 </v-expansion-panel>
             </v-card>
+            <br />
+            <PL4 id="rdp" />
           </v-flex>
         </v-layout>
       </v-container>
@@ -42,6 +48,7 @@ import Intro from './components/Intro'
 import Knowledge from './components/Knowledge'
 import PL1 from './components/PL1'
 import PL3 from './components/PL3'
+import PL4 from './components/PL4'
 
 export default {
   name: 'App',
@@ -49,7 +56,8 @@ export default {
     Intro,
     Knowledge,
     PL1,
-    PL3
+    PL3,
+    PL4
   }
 }
 </script>
