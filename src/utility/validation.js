@@ -2,189 +2,148 @@ const validate = {}
 let result
 
 validate.check = (string) => {
-	startEnd(string);
+	grammarValidation(string);
 	return result
 }
 
-//check if string begin and end with right characters
-function startEnd(input)
-{
-	if(input[0]!=="(" && !checkDigit(input[0]))
-	{
-		outputResult(false, "String has to start with a digit or (.");
+const grammarValidation = (string) => {
+	if(string[0] !== "(" && !scanDigit(string[0])) {
+		validationResult(false, "string must start with ( or a digit 0-3");
 		return result;
 	}
 	
-	if (input[input.length - 1] != "$") 
-	{
-		outputResult(false, "String has to end with \"$\"");
+	if (string[string.length - 1] != "$") {
+		validationResult(false, "string must have \"$\" at the end");
 		return result;
 	}
 	
-	checkForExtraSymbols(input);
+	scanExtra(string);
 }
 
-//checks;
-//1) if there are more than one $
-//2) if number of ( matches )
-function checkForExtraSymbols(input)
-{
-	var numOfDollarSigns=0;
-	var numOfOpenBrace=0;
-	var numOfCloseBrace=0;
+const scanExtra = (string) => {
+	let terminalSymb=0;
+	let openParens=0;
+	let closeParens=0;
 	
-	for(var i=0; i<input.length; i++)
-	{
-		if(input[i]=="$")
-			numOfDollarSigns++;
-		if(input[i]=="(")
-			numOfOpenBrace++;
-		if(input[i]==")")
-			numOfCloseBrace++;
+	for(let i=0; i<string.length; i++) {
+		if(string[i]=="$")
+			terminalSymb++;
+		if(string[i]=="(")
+			openParens++;
+		if(string[i]==")")
+			closeParens++;
 	}
 
-	if(numOfDollarSigns>1)
-	{
-		outputResult(false, "too many $");
+	if(terminalSymb>1) {
+		validationResult(false, "only one $ allowed");
 		return;
 	}
 	
-	if(numOfOpenBrace!=numOfCloseBrace)
-	{
-		outputResult(false, "parentheses must be matching.");
+	if(openParens!=closeParens) {
+		validationResult(false, "parentheses must be matching.");
 		return;
 	}
 	
-	checkIllegalCharacters(input);
+	scanIllegal(string);
 }
 
-//checks if there are any illegal characters such as alphabets !, @, etc...
-function checkIllegalCharacters(input)
-{
-	for(var i=0; i<input.length; i++)
-	{
-		if(!checkDigit(input[i]) && input[i]!=="(" && input[i]!==")" && input[i]!=="$" && input[i]!=="+" && input[i] !== "-" && input[i] !== "*" && input[i] !== "/")
+const scanIllegal = (string) => {
+	let legalChars = ["(", ")", "$", "+", "-", "*", "/"]
+	for(let i=0; i<string.length; i++) {
+		if(!scanDigit(string[i]) && !legalChars.includes(string[i]))
 		{
-			outputResult(false, `the character '${input[i]}' is not legal`);
+			validationResult(false, `the character '${string[i]}' is not legal`);
 			return;
 		}
 	}
 
-	checkWhatIsBeforeAndAfterSymbols(input);
+	scanBeforeAfter(string);
 }
 
-//make sure right characters are before and after each symbol, and digit.
-function checkWhatIsBeforeAndAfterSymbols(input)
-{
-	for(var i=0; i<input.length; i++)
-	{
-		if(checkDigit(input[i]))
-		{
-			if(checkDigit(input[(i-1)]) || checkDigit(input[(i+1)]))
-			{
-				outputResult(false, "can only have digits 0-3");
+const scanBeforeAfter = (string) => {
+	for(let i=0; i<string.length; i++) {
+		if(scanDigit(string[i])) {
+			if(scanDigit(string[(i-1)]) || scanDigit(string[(i+1)])) {
+				validationResult(false, "can only have digits 0, 1, 2, 3");
 				return;
 			}
 		}
 		
-		if(input[i]=="(")
-		{
-			//checks if ( is followed by a number
-			if( input[i+1]!=="(" && !checkDigit(input[(i+1)]))
-			{
-				outputResult(false, "( must be followed by a digit 0-3 or a (");
+		if(string[i]=="(") {
+			if(string[i+1]!=="(" && !scanDigit(string[(i+1)])) {
+				validationResult(false, "( must have a 0, 1, 2, 3 or a ( after it");
 				return;
 			}
 		}
 		
-		if(input[i]==")")
-		{
-			if(!checkDigit(input[(i-1)]) && input[i-1]!==")")
-			{
-				outputResult(false, ") must have a number before it or a )");
+		if(string[i]==")") {
+			if(!scanDigit(string[(i-1)]) && string[i-1]!==")") {
+				validationResult(false, ") must be preceded by a 0, 1, 2, 3 or a )");
 				return;
 			}
 			
-			if(input[i+1]!=="$" && input[i+1]!==")" && input[i+1]!=="+" && input[i+1]!=="-" && input[i+1]!=="*" && input[i+1]!=="/")
-			{
-				outputResult(false, ") must be followed by an operator, a $, or a )");
+			if(string[i+1]!=="$" && string[i+1]!==")" && string[i+1]!=="+" && string[i+1]!=="-" && string[i+1]!=="*" && string[i+1]!=="/") {
+				validationResult(false, ") must have an operator, $, or ) after them");
 				return;
 			}
 		}
 		
-		if(input[i]=="+" || input[i]=="-" || input[i]=="*" || input[i]=="/")
-		{
-			if(input[(i-1)]!=")" && !checkDigit(input[(i-1)]))
-			{
-				outputResult(false, "operators must have digits or ) before them");
+		if(string[i]=="+" || string[i]=="-" || string[i]=="*" || string[i]=="/") {
+			if(string[(i-1)]!=")" && !scanDigit(string[(i-1)])) {
+				validationResult(false, "all operators must be preceded by digits or )");
 				return;
 			}
 				
-			if( input[(i+1)]!="(" && !checkDigit(input[(i+1)]))
-			{
-				outputResult(false, "operators must be followed by digits or (");
+			if( string[(i+1)]!="(" && !scanDigit(string[(i+1)])) {
+				validationResult(false, "all operators must have digits or ( after them");
 				return;
 			}
 		}
 	}
 	
-	checkMatchingBraces(input);
+	scanParenth(string);
 }
 
-//check if open brace has matching close brace
-function checkMatchingBraces(input)
-{
-	var matchFound=0;
-	for(var i=0; i<input.length; i++)
-	{
-		if(input[i]=="(")
-		{
-			matchFound++;
-			var j=i+1;
-			while(matchFound!=0 && j<input.length)
+const scanParenth = (string) => {
+	let matchedParens=0;
+	for(let i=0; i<string.length; i++) {
+		if(string[i]=="(") {
+			matchedParens++;
+			let j=i+1;
+			while(matchedParens!=0 && j<string.length)
 			{
-				if(input[j]==")")
-				matchFound--;
+				if(string[j]==")")
+				matchedParens--;
 			
-				if(input[j]=="(")
-				matchFound++;
-				
+				if(string[j]=="(")
+				matchedParens++;
 				j++;
 			}
 		}
 	}
 
-	if(matchFound===0)
-
-		outputResult(true, "");
-	else 
-		outputResult(false, "open parenthesis must have matching close parenthesis")
+	if(matchedParens===0) {
+		validationResult(true, '');
+	}
+	else {
+		validationResult(false, "'(' must be closed with a ')'");
+	}
 }
 
-//checks if passed in character is a number between 0 and 3
-function checkDigit(digit)
-{
-	if(digit!=="0" && digit!=="1" && digit!=="2" && digit!=="3")
-	{
+const scanDigit = (digit) => {
+	let numbers = ["0", "1", "2", "3"];
+	if(!numbers.includes(digit)) {
 		return false;
 	}
 	return true;
 }
 
-function outputResult(res, why)
-{
-	
-	if(res)
-	{
-		
-		result="Valid String";
-		// console.log(result)
+const validationResult = (res, why) => {
+	if(res) {
+		result = "String is valid";
 	}
-	else
-	{		
-		
-		result=`Invalid String: ${why}`;
-		// console.log(result)
+	else {		
+		result = `Invalid String: ${why}`;
 	}
 	return;
 }
