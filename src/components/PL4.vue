@@ -29,6 +29,14 @@
                         <v-btn @click="clear">clear</v-btn>
                     </v-container>
                 </v-form>
+                
+                <v-card-text class="px-0">
+                    <v-container>
+                    <p>I implemented this recursive descent parser using JavaScript. I have been using JavaScript since learning web development a few years ago so I felt comfortable with this language due to my experience with it. I had the most trouble with implementing the function for matching parentheses. Other than that, implementation of the recursive is fairly straightforward and the source code is pretty self explanatory. It is by no means optimized since I had to spend time on my other responsibilities but it does its job.
+                    The only resources I used were the lecture slides on canvas about Recursive Descent parsing and this assignment as well as the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference" target="_blank">JavaScript MDN documentation</a> which is also an excellent resource for learning web development. 
+                    </p>
+                    </v-container>
+                </v-card-text>
             </v-card>
         </v-container>
     </div>
